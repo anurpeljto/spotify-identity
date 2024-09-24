@@ -28,6 +28,12 @@ export const GET = async(req: NextRequest) => {
             body: body.toString()
         });
 
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error fetching token:', errorData);
+            return new NextResponse('Error fetching token', { status: response.status });
+        }
+
         const data = await response.json();
         console.log(data);
         const token = data.access_token;
