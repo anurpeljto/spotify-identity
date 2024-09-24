@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import ArtistCard from '@/components/ArtistCard';
 import { serialKillers, genreTraits } from '@/constants';
 import Image from 'next/image';
+import { ReactTyped } from 'react-typed';
 
 export type Artist = {
   external_urls: {
@@ -27,7 +28,6 @@ export type Artist = {
   uri: string;
 }
 
-type Genre = keyof typeof genreTraits;
 
 export type Killer = {
   name: string,
@@ -83,17 +83,11 @@ const CallBack = () => {
   const searchParams = useSearchParams();
   const [items, setItems] = useState<Artist[]>([]);
   const [bestMatch, setBestMatch] = useState<Killer>();
-  const [image, setImage] = useState('');
   const token = searchParams.get('token');
   const token_type = searchParams.get('type');
 
-  if(!token || !token_type) {
-    return (
-      <h1>Missing token or token type in url</h1>
-    )
-  }
-
   useEffect(() => {
+    if(!token || !token_type) return;
     const getItems = async() => {
       const fetchedItems = await getUserData(token, token_type);
       setItems(fetchedItems);
@@ -118,7 +112,11 @@ const CallBack = () => {
   }, [token, token_type]);
 
   if(items.length === 0) {
-    <h1>Loading items</h1>
+    return (
+      <div className='flex flex-col items-center justify-center w-full h-screen'>
+          <h1 className='font-bold text-lg'>Loading <ReactTyped strings={['...']} loop={true} backSpeed={100} typeSpeed={150}/></h1>
+      </div>
+    )
   }
   console.log('Best match: ' + bestMatch);
 
