@@ -2,9 +2,15 @@ import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async(req: NextRequest) => {
     try {
+        const res = NextResponse.next();
         const {searchParams} = new URL(req.url);
         const code = searchParams.get('code');
         const redirect_uri = process.env.REDIRECT_URI;
+        
+        res.headers.set("Access-Control-Allow-Origin", "*");
+        res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
         if (!redirect_uri) {
             return new NextResponse('Missing environment variables: REDIRECT_URI', { status: 500 });
         }
