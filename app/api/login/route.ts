@@ -4,7 +4,7 @@ export const GET = async() => {
     const state = '0lTAixFVRY8ckUT6';
     const scope = 'user-read-private%20user-read-email%20user-top-read';
     const client_id = process.env.CLIENT_ID
-    const redirect_uri = process.env.redirect_uri;
+    const redirect_uri = process.env.REDIRECT_URI;
 
 
     if (!client_id || !redirect_uri) {
