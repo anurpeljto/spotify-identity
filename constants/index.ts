@@ -1,29 +1,19 @@
 import { Killer } from "@/app/callback/page";
 
 export const genreTraits = {
-  rock: ["rebellious", "energetic", "bold"],
-  pop: ["friendly", "approachable", "fun"],
-  hipHop: ["assertive", "confident", "streetwise"],
-  jazz: ["sophisticated", "introspective", "creative"],
-  metal: ["intense", "aggressive", "dark"],
-  country: ["nostalgic", "down-to-earth", "storytelling"],
-  electronic: ["innovative", "experimental", "energetic"],
-  "alternative metal": ["heavy", "experimental", "melodic"],
-  "modern rock": ["contemporary", "dynamic", "melodic"],
-  "pop punk": ["energetic", "rebellious", "catchy"],
-  punk: ["aggressive", "raw", "rebellious"],
-  "socal pop punk": ["youthful", "catchy", "upbeat"],
-  pluggnb: ["catchy", "melodic", "modern"],
-  "rage rap": ["aggressive", "intense", "expressive"],
-  "cloud rap": ["atmospheric", "dreamy", "laid-back"],
-  glitchcore: ["experimental", "electronic", "unconventional"],
-  "croatian rock": ["local", "traditional", "melodic"],
-  "alternative emo": ["emotional", "introspective", "personal"],
-  emo: ["emotional", "confessional", "raw"],
-  "philly indie": ["independent", "artistic", "unique"],
-  "pov: indie": ["independent", "experimental", "authentic"],
-  // Add more genres and traits as needed
-};
+  a_cappella: ["nostalgic", "playful", "cheerful"],
+  abstract: ["harmonious", "serene", "uplifting"],
+  abstract_beats: ["nostalgic", "playful", "cheerful"],
+  abstract_hip_hop: ["poetic", "inventive", "complex"],
+  abstract_idm: ["poetic", "inventive", "complex"],
+  accordion: ["chaotic", "unpredictable", "cerebral"],
+  acid_house: ["nostalgic", "playful", "cheerful"],
+  acid_jazz: ["melancholic", "somber", "soulful"],
+  acid_techno: ["aggressive", "chaotic", "wild"],
+  acousmatic: ["experimental", "cerebral", "avant-garde"],
+  acoustic_blues: ["somber", "melancholic", "reflective"],
+  acoustic_pop: ["cheerful", "uplifting", "lighthearted"],
+}
 
 
 export const serialKillers: Killer[] = [

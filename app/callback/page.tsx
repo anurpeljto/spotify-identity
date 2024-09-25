@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import ArtistCard from '@/components/ArtistCard';
-import { serialKillers, genreTraits } from '@/constants';
-import Image from 'next/image';
 import { ReactTyped } from 'react-typed';
 
 export type Artist = {
@@ -29,11 +27,6 @@ export type Artist = {
 }
 
 
-export type Killer = {
-  name: string,
-  image: string,
-  traits: string[]
-}
 
 const getUserData = async(token: string, token_type: string) => {
 
@@ -53,36 +46,24 @@ const getUserData = async(token: string, token_type: string) => {
 
 }
 
-function getArtistTraits(artist: Artist) {
-  const genre = artist.genres[0]?.toLowerCase();
-  if (genre && genre in genreTraits) {
-    return genreTraits[genre as keyof typeof genreTraits]
-  }
-  return [];
-}
 
-const getSerialKillerMatch = (userTraits: { [key: string]: number }) => {
-  let bestMatch: Killer | null = null;
-  let highestScore = 0;
+const getPopularity = async(artist: Artist[]) => {
+    let totalPopularity = 0;
+    artist.map((artist) => totalPopularity += artist.popularity)
 
-  serialKillers.forEach(killer => {
-    const score = killer.traits.reduce((total, trait) => {
-      return total + (userTraits[trait] || 0);
-    }, 0);
-
-    if (score > highestScore) {
-      highestScore = score;
-      bestMatch = killer;
+    if(totalPopularity >= 300) {
+      return true
     }
-  });
-  return bestMatch;
-};
+    else {
+      return false
+    }
+}
 
 
 const CallBack = () => {
   const searchParams = useSearchParams();
   const [items, setItems] = useState<Artist[]>([]);
-  const [bestMatch, setBestMatch] = useState<Killer>();
+  const [basic, setBasic] = useState(false)
   const token = searchParams.get('token');
   const token_type = searchParams.get('type');
 
@@ -92,23 +73,15 @@ const CallBack = () => {
       const fetchedItems = await getUserData(token, token_type);
       setItems(fetchedItems);
       
-      const userTraits : {[key: string]: number} = {};
-
-      fetchedItems.forEach((artist: Artist) => {
-        const traits = getArtistTraits(artist);
-        traits.forEach(trait => {
-          userTraits[trait] = (userTraits[trait] || 0) + 1;
-        })
-      });
-
-      const match = getSerialKillerMatch(userTraits);
-      if(match) {
-        setBestMatch(match);
-
-      }
     }
 
       getItems();
+
+      const getBasic = async() => {
+        const isBasic = await getPopularity(items);
+        setBasic(isBasic);
+      }
+      getBasic();
   }, [token, token_type]);
 
   if(items.length === 0) {
@@ -118,7 +91,6 @@ const CallBack = () => {
       </div>
     )
   }
-  console.log('Best match: ' + bestMatch);
 
   return (
     <div className='min-h-screen md:w-2/3 w-full mx-auto flex flex-col items-center gap-10 py-10 px-10'>
@@ -131,13 +103,7 @@ const CallBack = () => {
         }
       </div>
 
-      {bestMatch && 
-      
-        <div className='flex flex-col items-center justify-center gap-2'>
-          <h2 className='text-4xl mt-10'>You are <strong className='text-red-500 font-bold'>{bestMatch.name}</strong></h2>
-          <Image src={bestMatch.image} alt='Picture' width={300} height={300}/>
-        </div>
-        }
+      <h1>YOU ARE {basic? 'BASIC' : 'NOT BASIC'}</h1>
     </div>
   )
 }
