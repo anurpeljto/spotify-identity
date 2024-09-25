@@ -103,7 +103,7 @@ const CallBack = () => {
         }
       </div>
 
-        <div>
+        <div className='flex flex-col gap-2 items-center justify-center'>
           <h1 className='text-4xl font-bold text-green-500'>YOU ARE {basic? 'BASIC' : 'NOT BASIC'}</h1>
           <p className='text-lg dark:text-gray-300 text-white'>{basic? "Well that sucks" : "Your friends were wrong about you"}</p>
         </div>
