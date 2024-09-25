@@ -103,7 +103,10 @@ const CallBack = () => {
         }
       </div>
 
-      <h1 className='text-2xl font-bold text-green-500'>YOU ARE {basic? 'BASIC' : 'NOT BASIC'}</h1>
+        <div>
+          <h1 className='text-4xl font-bold text-green-500'>YOU ARE {basic? 'BASIC' : 'NOT BASIC'}</h1>
+          <p className='text-lg dark:text-gray-300 text-white'>{basic? "Well that sucks" : "Your friends were wrong about you"}</p>
+        </div>
     </div>
   )
 }

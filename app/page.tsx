@@ -13,7 +13,7 @@ export default function Home() {
           height={38}
           priority
         /> */}
-        <h1 className="text-2xl">Find out which serial killer you are based on your top artists</h1>
+        <h1 className="text-2xl">Find out if you are basic based on the average popularity of your top artists</h1>
 
         <LoginBtn/>
       </main>

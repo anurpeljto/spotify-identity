@@ -15,7 +15,7 @@ const ArtistCard = ({artist}: ArtistCardProps) => {
         <h1 className='font-semibold text-xl dark:text-red-500'>{artist.name}</h1>
         <div className='flex flex-row gap-2 items-center justify-center'>
           {
-            artist.genres.slice(0, 3).map(genre => (<span className='font-lg dark:text-gray-300 text-red-500' key={genre}>{genre}</span>))
+            artist.genres.slice(0, 3).map(genre => (<span className='font-lg dark:text-gray-300 text-green-500' key={genre}>{genre}</span>))
           }
         </div>
       </div>
